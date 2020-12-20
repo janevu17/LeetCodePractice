@@ -1,0 +1,54 @@
+class Solution {
+    public int numberOfArithmeticSlices(int[] A) {
+        
+        if (A.length < 2){
+            return 0;
+        }
+        
+        if (A.length == 3){
+            if (checkArithmetic(A)){
+                return 1;
+            }
+        }
+        
+        int totalArithSlices = 0;
+        int consecArithSlices = 0;
+        for (int i = 0; i < A.length - 1; i++){
+            int[] sliceOfA = Arrays.copyOfRange(A, i, i + 3);
+            if (checkArithmetic(sliceOfA)){
+                consecArithSlices++;
+            }
+            else {
+                if (consecArithSlices > 0){
+                    totalArithSlices += calcArithSlices(consecArithSlices);
+                    consecArithSlices = 0;
+                }
+            }
+        }
+        
+        return totalArithSlices;
+        
+            
+    }
+    
+    //calculate all possible slices of arithmetic array
+    public int calcArithSlices(int arithArrSize){
+        int sumOfSlices = arithArrSize;
+        while (arithArrSize != 0){
+            arithArrSize--;
+            sumOfSlices += arithArrSize;
+        }
+        return sumOfSlices;
+    }
+    
+    //checkArithmetic of Array of 3
+    public boolean checkArithmetic(int[] threeOfA){
+        if ((threeOfA[2] - threeOfA[1]) == (threeOfA[1] - threeOfA[0])){
+            return true;
+        }
+            
+        return false;
+    }
+    
+  
+}
