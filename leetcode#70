@@ -1,0 +1,35 @@
+class Solution {
+    
+    //draw the problem in a tree, the total ways = total leaves, make a table to remember the value of total leaves for each root value
+    public int climbStairs(int n) {
+        if (n == 0){
+            return 0;
+        }
+        
+        if (n == 1){
+            return 1;
+        }
+        
+        if (n == 2){
+            return 2;
+        }
+        
+        int[] table = new int[n + 1];   //if n > 2
+        table[0] = 0;
+        table[1] = 1;
+        table[2] = 2;
+        for (int i = 3; i < table.length; i++){   
+            /*
+            #leaves of root at i = #leaves of right child when last step is 1 
+                                 + #leaves of left child when last step is 2 
+            */
+            table[i] = table[i-2] + table[i-1];     
+            
+            
+        }
+        
+        return table[n];
+    }
+ 
+        
+}
