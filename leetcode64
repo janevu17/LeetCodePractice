@@ -1,0 +1,50 @@
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        if (row == 0 && col == 0){
+            return grid[0][0];
+        }
+        
+        //make a table to store minPathSum of each node
+        int[][] minSumTable  = new int[row][col];
+        
+        
+        //initial base case 
+        minSumTable[row - 1][col - 1] = grid[row - 1][col - 1];
+        
+        //find minPathSum of nodes can only go right
+        if (row > 1){
+            for (int i = row - 2; i >= 0; i--){
+                minSumTable[i][col - 1] = grid[i][col - 1] + minSumTable[i + 1][col - 1];
+            }
+        }
+        
+        //find minPathSum of nodes can only go down
+        if (col > 1){
+            for (int j = col - 2; j >= 0; j--){
+                minSumTable[row - 1][j] = grid[row - 1][j] + minSumTable[row - 1][j + 1];
+            }
+        }
+        
+        //find minPathSum of nodes can both go right and down
+        if (row > 1 && col > 1){
+            for (int i = row - 2; i >= 0; i--){
+                for (int j = col - 2; j >= 0; j--){
+                    minSumTable[i][j] =  grid[i][j] + minSum(minSumTable[i][j + 1], minSumTable[i + 1][j]);     
+                }   
+            }
+        }
+        
+        return minSumTable[0][0];
+    }
+    
+    
+    //return min upon 2 integers
+    public int minSum(int min1, int min2){
+        if (min1 < min2){
+            return min1;
+        }
+        return min2;
+    }
+}
