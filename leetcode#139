@@ -1,0 +1,28 @@
+class Solution {
+    int[] table;
+    public boolean wordBreak(String s, List<String> wordDict) {
+        table = new table[n];
+        for (int i = 1; i < table.length; i++){
+            table[i] = false;
+        }
+        table[0] = true;
+        for (int i = 0; i < table.length; i++){
+            if (table[i]){
+                for (int j = 0; j < wordDict.size(); j++){
+                    String word = wordDict.get(j);
+                    if (word.length() <= (s.length() - i)){
+                        String subS = s.substring(i, i + word.length());
+                        if (subS.equals(word)){
+                            table[i + word.length()] = true;
+                        }   
+                    }          
+                }
+            }
+        }
+         
+        return table[s.length()];
+     }
+    
+}
+
+// canConstruct tabulation
