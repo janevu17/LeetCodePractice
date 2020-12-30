@@ -1,0 +1,54 @@
+class MyCalendar {
+    List<Integer[]> calendar;
+    
+    public MyCalendar() {
+       calendar = new ArrayList<Integer[]>(); 
+        
+    }
+    
+    public boolean book(int start, int end) {
+        if (end < start){
+            return false;
+        }
+        Integer[] booked = {start, end};
+        if (calendar.isEmpty()){ 
+            calendar.add(booked);
+            return true;
+        }
+        else if(calendar.size() == 1){
+            Integer[] bookItem = calendar.get(0);
+            if (start >= bookItem[0] && start < bookItem[1] || end > bookItem[0] && end <= bookItem[1]) {
+                return false;
+            }
+        }
+        else{
+            for (int i = 0; i < calendar.size(); i++){
+                Integer[] bookItem = calendar.get(i);
+                if (start >= bookItem[0] && start < bookItem[1] || end > bookItem[0] && end <= bookItem[1]) {
+                    return false;
+                }
+                if (start <= bookItem[0] && end >= bookItem[1]){
+                    return false;
+                }
+                
+                
+            }
+            
+
+        }
+        calendar.add(booked);
+        Collections.sort(calendar, new Comparator<Integer[]>() {
+         @Override
+            public int compare(Integer[] o1, Integer[] o2) {
+                //if (o1[0] < o2[0]){
+                //   return 1;
+                //}
+                return o1[0].compareTo(o2[0]);
+            }   
+        });
+        return true;
+        
+        
+    }
+    
+}
