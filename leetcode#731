@@ -37,15 +37,7 @@ class MyCalendar {
 
         }
         calendar.add(booked);
-        Collections.sort(calendar, new Comparator<Integer[]>() {
-         @Override
-            public int compare(Integer[] o1, Integer[] o2) {
-                //if (o1[0] < o2[0]){
-                //   return 1;
-                //}
-                return o1[0].compareTo(o2[0]);
-            }   
-        });
+       
         return true;
         
         
