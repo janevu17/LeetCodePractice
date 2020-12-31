@@ -1,0 +1,25 @@
+class Solution {
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        TreeNode merged = new TreeNode();
+        merged = newTree(t1, t2, merged);
+        return merged;
+    }
+    
+    public TreeNode newTree(TreeNode t1, TreeNode t2, TreeNode t){
+        if (t1 == null){
+            return t2;
+        }
+        
+        if (t2 == null){
+            return t1;
+        }
+        
+        t.val = t1.val + t2.val;
+        t.left = new TreeNode();
+        t.right = new TreeNode();
+        t.left = newTree( t1.left, t2.left, t.left);
+        t.right = newTree( t1.right, t2.right, t.right);
+        
+        return t;
+    }
+}
