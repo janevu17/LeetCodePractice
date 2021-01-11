@@ -1,0 +1,55 @@
+/*
+    For an mxn matrix:
+        if m == 0: no square
+        if m == 1 or n == 1, the maximum length of a square is 1 only;
+        if m >= 1 & n >= 1:
+            n: number of cubes of '1'
+            n = 1 --> 1 square;
+            n = 2 --> 4 squares of n = 1;
+            n = 3 --> 4 squares of n = 2
+        
+*/
+
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        int maxLength = 0;
+        int rows    = matrix.length;
+        int columns  = matrix[0].length;
+        
+        if (rows == 0){
+            return maxLength;
+        }
+        int[] [] dp = new int[rows][columns];
+        
+        for (int i = 0; i < rows; i++){
+            if (matrix[i][0] == '1') {
+                dp[i][0] = 1;
+                maxLength = 1;
+            }
+              
+        }
+        
+        for (int i = 0; i < columns; i++) {
+            if (matrix[0][i] == '1') {
+                dp[0][i] = 1;
+                maxLength = 1;
+               
+            }
+            
+        }
+        
+        
+        if (rows >= 1 && columns >= 1) {
+            for (int i = 1; i < rows; i++) {
+                for (int j = 1; j < columns; j++) {
+                    if (matrix[i][j] == '1') {
+                        dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1 ;
+                        maxLength = Math.max(maxLength, dp[i][j]);
+                    }
+                }
+            }
+        }
+        
+        return maxLength*maxLength;    
+    }
+}
