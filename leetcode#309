@@ -1,0 +1,35 @@
+/*
+  Use State Machine
+  
+            Reset
+            
+            
+    Sold            Hold
+    
+    
+    Sold: the value of the stock we have sold
+    Hold: balance - the value of the stock we are holding 
+    Starting with Reset state, either you can remains rest or buy a stock
+    
+    
+  
+    
+*/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int sold = Integer.MIN_VALUE;
+        int hold = Integer.MIN_VALUE;
+        int reset = 0;
+        
+        for (int i = 0; i < prices.length; i++){
+            int prev_sold = sold;
+            sold = hold + prices[i];
+            hold = Math.max(hold, reset - prices[i]);
+            reset = Math.max(reset, prev_sold);
+        }
+        
+        return Math.max(reset, sold);
+    }
+    
+}
