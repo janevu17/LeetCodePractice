@@ -16,3 +16,20 @@ class Solution {
         return duplicates;
     }
 }
+
+//Mark the value at index nums[i - 1] as 1 ≤ a[i] ≤ n (n = size of array)
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> duplicates = new ArrayList<Integer>();
+        for (int num : nums) {
+            
+            if (nums[Math.abs(num) - 1] < 0 ){
+                duplicates.add(Math.abs(num));  
+            } 
+            nums[Math.abs(num) - 1] = -nums[Math.abs(num) - 1];
+        }
+        
+        return duplicates;
+        
+    }
+}
