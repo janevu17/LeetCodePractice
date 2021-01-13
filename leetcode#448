@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> disappearedNum = new ArrayList<Integer>();
+        for (int num : nums) {
+            if (nums[Math.abs(num) - 1] > 0) {
+                nums[Math.abs(num) - 1] = - nums[Math.abs(num) - 1];
+            }    
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0){
+                disappearedNum.add(i + 1);   
+            }
+        }
+        return disappearedNum;
+    }
+}
+
+
+//the trick is to use the piece of info given: 1 <= a[i] <= nums.length
+
