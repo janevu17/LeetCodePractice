@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Map<Integer, int[]> nodeMap = new HashMap<>();
+        
+        dfs(root, x, y, 0, 0, nodeMap);
+        int[] nodeX = nodeMap.get(x);
+        int[] nodeY = nodeMap.get(y);
+        
+        if (nodeX != null && nodeY != null && nodeX[0] == nodeY[0] && nodeX[1] != nodeY[1]) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void dfs(TreeNode root, int x, int y, int level, int parent, Map<Integer, int[]> nodeMap) {
+        
+        if (root == null){
+            return;
+        }
+        
+        int[] nodeData = new int[]{level, parent};
+        if (root.val == x || root.val == y){
+            nodeMap.put(root.val, nodeData);    
+        }   
+        dfs(root.left, x, y, level + 1, root.val, nodeMap);
+        dfs(root.right, x, y, level + 1, root.val, nodeMap);
+        
+    }
+}
