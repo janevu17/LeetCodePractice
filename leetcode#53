@@ -1,0 +1,32 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0){
+            return 0;
+        }   
+        
+        if (nums.length == 1){
+            return nums[0];
+        }
+        if (nums.length == 2){
+            if (nums[0] > 0 && nums[1] > 0) {
+                return nums[0] + nums[1];
+            }
+            else{
+                return Math.max(nums[0], nums[1]);
+            }
+        }
+        
+        int maxSubArr = 0;
+        int globalMax = Integer.MIN_VALUE;
+        int localMax  = 0;
+
+        for (int num : nums) {
+            localMax = Math.max(num, localMax + num);
+            if (globalMax < localMax) {
+                globalMax = localMax;
+            }
+        }
+        
+        return globalMax;
+    }
+}
