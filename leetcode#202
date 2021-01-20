@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isHappy(int n) {
+        HashMap<Integer, Integer> sumTable = new HashMap<>();
+        while (n != 1 && !sumTable.containsKey(n) ) {
+            int temp = n;
+            int sum = 0;
+            while (temp > 0) {
+                sum += Math.pow(temp % 10, 2);
+                temp = temp/10;
+            }
+            sumTable.put(n, sum);
+            n = sum;
+        }
+        
+        if (n == 1){
+            return true;
+        } 
+        
+        return false;
+    }
+}
