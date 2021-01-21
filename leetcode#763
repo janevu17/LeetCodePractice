@@ -1,0 +1,25 @@
+class Solution {
+    public List<Integer> partitionLabels(String S) {
+        HashMap<Character, Integer> lastPositionMap = new HashMap<Character, Integer>();
+        List<Integer> partition = new ArrayList<Integer>();
+        int len = S.length();
+        for (int i = 0; i < len; i++) {
+            lastPositionMap.put(S.charAt(i), i);
+        }
+        
+        int start = 0;
+        int end = 0;
+        
+        for (int i = 0; i < len; i++) {
+            end = Math.max(end, lastPositionMap.get(S.charAt(i)));
+            if (i == end) {
+                partition.add(end - start + 1);
+                start = end + 1;
+                
+            }
+        }
+        
+        return partition;
+        
+    }
+}
