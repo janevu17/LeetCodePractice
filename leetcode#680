@@ -1,0 +1,40 @@
+class Solution {
+    public boolean validPalindrome(String s) {
+        int len = s.length();
+        if (len == 0 || len == 1) {
+            return true;
+        }
+        int  = 1;
+        int goAgainI = -1;
+        int goAgainJ = -1;
+        int i = 0;
+        int j = len - 1;
+        while (i < j) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
+            } else {
+                if (delete != 0){
+                    goAgainI = i;
+                    goAgainJ = j - 1;
+                    i++;
+                    delete = 0;
+                } else {
+                    if (goAgainI == -2){
+                        System.out.println(i + " " + s.charAt(i));
+                        System.out.println(j + " " + s.charAt(j));
+                        return false;
+                    }
+                   
+                    i = goAgainI;
+                    j = goAgainJ;
+                    goAgainI = -2;
+                    goAgainJ = -2;
+                }
+                
+            }
+        }
+        
+        return true;
+    }
+}
