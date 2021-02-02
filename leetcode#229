@@ -1,0 +1,25 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int len = nums.length;
+        int majority = len/3;
+        List<Integer> majorArr = new ArrayList<Integer>();
+        HashMap<Integer, Integer> majorMap = new HashMap<Integer, Integer>();
+        for (int num : nums) {
+            if (majorMap.containsKey(num)) {
+                majorMap.put(num, majorMap.get(num) + 1);
+            }
+            else {
+                majorMap.put(num, 1);
+            }
+        }
+        
+        for (Map.Entry<Integer, Integer> entry : majorMap.entrySet()) {
+            int freq = entry.getValue();
+            if (freq > majority) {
+                majorArr.add(entry.getKey());    
+            }   
+        }
+        
+        return majorArr;
+    }
+}
