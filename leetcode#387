@@ -1,0 +1,25 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        if (s.length() == 0){
+            return -1;
+        }
+        Map<Character, Integer> charMap = new HashMap<Character, Integer>();
+        int len = s.length();
+        for (int i = 0; i < len; i++){
+            if (!charMap.containsKey(s.charAt(i))) {
+                charMap.put(s.charAt(i), 1);
+ 
+            }
+            else {
+                charMap.put(s.charAt(i), charMap.get(s.charAt(i)) + 1);
+            }
+        }
+        System.out.println(charMap);
+        for (int i = 0; i < len; i++){
+            if (charMap.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
