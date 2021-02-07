@@ -1,0 +1,50 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashMap<Integer, int[]> rows = new HashMap<Integer, int[]>();
+        HashMap<Integer, int[]> cols = new HashMap<Integer, int[]>();
+        HashMap<Integer, int[]> grids = new HashMap<Integer, int[]>();
+        
+        for (int i = 1; i < 10; i++) {
+            rows.put(i, new int[10]);
+            cols.put(i, new int[10]);
+            grids.put(i, new int[10]);
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int[] rowCheck = rows.get(i + 1);
+                int[] colCheck = cols.get(j + 1);
+                int gridPos = (j / 3 + 1) + (i / 3)*3;
+                int[] gridCheck = grids.get(gridPos);
+                if (board[i][j] != '.'){
+                    int num = Character.getNumericValue(board[i][j]);
+                    if (rowCheck[num] != 0){
+                        System.out.println("checked1");
+                        return false;
+                    }
+                    else{
+                        rowCheck[num] = num;
+                    }
+                    if (colCheck[num] != 0) {
+                        System.out.println("checked2");
+                        return false;
+                    }
+                    else{
+                        colCheck[num] = num;
+                    }
+                    if (gridCheck[num] != 0) {
+                        System.out.println(gridPos);
+                        System.out.println(i + " " + j);
+                        System.out.println(num);
+                        System.out.println("checked3");
+                        return false;
+                    }
+                    else{
+                        gridCheck[num] = num;
+                    }
+                }       
+            }
+            
+        }
+        return true;
+    }
+}
