@@ -1,0 +1,27 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int len = height.length;
+        if (len < 2){
+            return 0;
+        }
+        int i = 0;
+        int j = len - 1;
+        int maxTank = Math.min(height[0], height[len-1])*(len - 1);
+        while (i < j) {
+            int keptVerticle = Math.max(height[i],height[j]);
+            if (keptVerticle == height[i]){
+                j--;
+            }
+            else{
+                i++;
+            }
+            int newVerticle = Math.min(height[i], height[j]);
+            int newTank = newVerticle*(j - i);
+            if (newTank > maxTank){
+                maxTank = newTank;
+            }
+        }
+        
+        return maxTank;
+    }
+}
