@@ -1,0 +1,18 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+        int col = matrix[0].length;                          //Temporary Matrix
+        int row = matrix.length;        
+        int[][] tempMatrix = new int[col][row];
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                tempMatrix[i][j] = matrix[i][j];
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                matrix[i][j] = tempMatrix[col - j - 1][i];
+            }
+        }  
+    }
+}
