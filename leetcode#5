@@ -1,0 +1,38 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        int start = 0;
+        int end = 0;
+        int longestLength = 1;
+        int len = s.length();
+        if (len < 3) {
+            if (len == 2) {
+                if (s.charAt(0) == s.charAt(1)) {
+                    return s;    
+                }
+            }
+            return s;
+        }
+        
+        for (int i = 1; i < len - 1; i++) {
+            int len1 = expandAroundMiddle(s, i, i);
+            int len2 = expandAroundMiddle(s, i, i + 1);
+            int maxSubPal = Math.max(len1, len2);
+            if (maxSubPal > end - start) {
+                start = i - (maxSubPal - 1) / 2;
+                end = i + maxSubPal / 2;
+            }
+        }
+        
+        return s.substring(start, end + 1);
+    }
+
+    public int expandAroundMiddle(String s, int left, int right) {
+        
+        while (left > 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        
+        return right - left - 1;
+    } 
+}
