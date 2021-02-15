@@ -1,0 +1,21 @@
+class Solution {
+    public int[] arrayRankTransform(int[] arr) {
+        int len = arr.length;
+        int[] tempArr = arr.clone();
+        Arrays.sort(tempArr);
+        
+        HashMap<Integer, Integer> rankTable = new HashMap<Integer, Integer>();
+        for (int i = 0; i < len; i++) {
+            if (!rankTable.containsKey(tempArr[i])) {
+                rankTable.put(tempArr[i], rankTable.size() + 1);
+            }
+        }
+        
+        for (int i = 0; i < len; i++) {
+            arr[i] = rankTable.get(arr[i]);
+        }
+        
+        return arr;
+        
+    }
+}
