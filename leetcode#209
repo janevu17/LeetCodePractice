@@ -1,0 +1,32 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int len = nums.length;
+        int subArraySize = len;
+        boolean found  = false;
+        int i = 0;
+        while (i < len) {
+            int sum = nums[i];
+            if (nums[i] >= target){
+                return 1;
+            }
+            int j = 1;
+            while (sum < target && i + j < len && j <= subArraySize - 1 ) {
+                sum += nums[i + j];
+                j++;
+                
+            }
+            if (sum >= target) {
+                System.out.println(nums[i]);
+                subArraySize = j;
+                found = true;
+            }   
+            i++;
+        } 
+        if (found == false){
+            return 0;
+        }
+        
+        return subArraySize;
+    }
+    
+}
