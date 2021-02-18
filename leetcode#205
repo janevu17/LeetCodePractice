@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Character> isomorphicMapS = new HashMap<Character, Character>();
+        HashMap<Character, Character> isomorphicMapT = new HashMap<Character, Character>();
+        for (int i = 0; i < s.length(); i ++) {
+            Character charS = s.charAt(i);
+            Character charT = t.charAt(i);
+            if (isomorphicMapS.containsKey(charS)) {
+                if (isomorphicMapS.get(charS) != charT) {
+                    return false;
+                }
+            } else {
+                isomorphicMapS.put(charS, charT);
+            }
+            if (isomorphicMapT.containsKey(charT)) {
+                if (isomorphicMapT.get(charT) != charS) {
+                    return false;
+                }
+            } else {
+                isomorphicMapT.put(charT, charS);
+            }
+            
+        }
+        
+                
+        return true;
+            
+        
+    }
+}
