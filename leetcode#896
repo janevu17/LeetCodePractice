@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isMonotonic(int[] A) {
+        int len = A.length;
+        if (len < 2){
+            return true;
+        }
+        int i = 0;
+        int j = 1;
+        int monoDirection = A[len - 1] - A[0];
+        while (j < len) {
+            if (monoDirection > 0){
+                if (A[j] >= A[i]){
+                    i++;
+                    j++;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if (A[j] <= A[i]){
+                    i++;
+                    j++;
+                }
+                else{
+                    return false;
+                }
+                
+            }
+                  
+        }
+
+        return true;
+           
+    }
+}
