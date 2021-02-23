@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<List<String>>();
+        HashMap<String, List<String>> anagramTable = new HashMap<String, List<String>>();
+        for (String word :strs) {
+            String sortedWord = sortedString(word);
+            if (!anagramTable.containsKey(sortedWord)) {
+                List<String> newList = new ArrayList<String>();
+                newList.add(word);
+                anagramTable.put(sortedWord, newList);
+            }
+            else{
+                List<String> existedList = anagramTable.get(sortedWord);
+                existedList.add(word);
+                anagramTable.put(sortedWord, existedList);
+            }
+        }
+        
+        for (Map.Entry<String, List<String>> entry : anagramTable.entrySet()) {
+            result.add(entry.getValue());      
+        }     
+        return result;            
+    }
+    public String sortedString(String str) {
+        char[] charArr = str.toCharArray();
+        Arrays.sort(charArr);
+        return new String(charArr);
+    }
+}
